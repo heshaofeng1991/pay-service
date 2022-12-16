@@ -1,22 +1,22 @@
 package router
 
 import (
-	"airmart_pay/pay/whole_pay"
+	"airmart_pay/pay-api/netpay"
 	"github.com/gin-gonic/gin"
 )
 
 func NftPayRouterGroup(apiGroup *gin.RouterGroup) {
-	nftWholePay := apiGroup.Group("/whole_pay")
+	nftWholePay := apiGroup.Group("/netpay")
 	{
-		nftWholePay.POST("/create", whole_pay.WholePay{}.Pay)                 // Pay 客户端 发起支付 -- 下单支付
-		nftWholePay.GET("/detail", whole_pay.WholePay{}.GetPayRecord)         // 支付流水记录 -- 订单交易查询
-		nftWholePay.POST("/refund", whole_pay.WholePay{}.Refund)              // 退款
-		nftWholePay.GET("/refund_detail", whole_pay.WholePay{}.GetRefund)     // 退款查询
-		nftWholePay.POST("/cancel", whole_pay.WholePay{}.CancelPay)           // 超时取消支付 -- 订单关闭
-		nftWholePay.POST("/callback", whole_pay.WholePay{}.Callback)          // Callback 支付回调处理
-		nftWholePay.POST("/mock_pay", whole_pay.WholePay{}.MockPay)           // MockPay 模拟支付
-		nftWholePay.GET("/pay_status", whole_pay.WholePay{}.GetPayStatus)     // 主动查询支付状态
-		nftWholePay.POST("/pay_notice", whole_pay.WholePay{}.NoticePay)       // 支付结果通知
-		nftWholePay.POST("/pay_result", whole_pay.WholePay{}.ReturnPayResult) // 结果页面返回
+		nftWholePay.POST("/create", netpay.WholePay{}.Pay)                 // Pay 客户端 发起支付 -- 下单支付
+		nftWholePay.GET("/detail", netpay.WholePay{}.GetPayRecord)         // 支付流水记录 -- 订单交易查询
+		nftWholePay.POST("/refund", netpay.WholePay{}.Refund)              // 退款
+		nftWholePay.GET("/refund_detail", netpay.WholePay{}.GetRefund)     // 退款查询
+		nftWholePay.POST("/cancel", netpay.WholePay{}.CancelPay)           // 超时取消支付 -- 订单关闭
+		nftWholePay.POST("/callback", netpay.WholePay{}.Callback)          // Callback 支付回调处理
+		nftWholePay.POST("/mock_pay", netpay.WholePay{}.MockPay)           // MockPay 模拟支付
+		nftWholePay.GET("/pay_status", netpay.WholePay{}.GetPayStatus)     // 主动查询支付状态
+		nftWholePay.POST("/pay_notice", netpay.WholePay{}.NoticePay)       // 支付结果通知
+		nftWholePay.POST("/pay_result", netpay.WholePay{}.ReturnPayResult) // 结果页面返回
 	}
 }

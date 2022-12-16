@@ -1,8 +1,8 @@
-package whole_pay
+package netpay
 
 import (
 	"airmart_pay/internal"
-	"airmart_pay/pay/base"
+	"airmart_pay/pay-api/base"
 	"github.com/gin-gonic/gin"
 )
 

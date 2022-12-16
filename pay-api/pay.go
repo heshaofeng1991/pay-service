@@ -1,8 +1,8 @@
-package pay
+package pay_api
 
 import (
-	. "airmart_pay/pay/base"
-	_ "airmart_pay/pay/whole_pay"
+	. "airmart_pay/pay-api/base"
+	_ "airmart_pay/pay-api/netpay"
 )
 
 func GetAll() []PayInstance {
