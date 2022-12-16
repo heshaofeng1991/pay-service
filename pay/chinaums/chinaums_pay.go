@@ -1,8 +1,12 @@
-package netpay
+package chinaums
 
 import (
+	"airmart-core/response"
 	"airmart_pay/internal"
-	"airmart_pay/pay-api/base"
+	"airmart_pay/pay/base"
+	"airmart_pay/service"
+	"airmart_pay/types"
+	"errors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,8 +19,26 @@ type NetPay struct {
 }
 
 func (w NetPay) Pay(ctx *gin.Context) {
-	//TODO implement me
-	panic("implement me")
+	req := &types.NetPayReq{}
+
+	s := service.New(ctx)
+
+	if err := ctx.ShouldBind(req); err != nil {
+		s.Failed(internal.ParamErr.Err(err))
+
+		return
+	}
+
+	id, err := service.New(ctx).Pay(req)
+	if err != nil {
+		s.Failed(response.ParamErr.Err(errors.New("创建数藏Banner配置失败")))
+
+		return
+	}
+
+	s.Success(&types.NetPayData{
+		ID: id,
+	})
 }
 
 func (w NetPay) GetPayRecord(ctx *gin.Context) {

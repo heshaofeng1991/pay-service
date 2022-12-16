@@ -2,7 +2,7 @@ package other_pay
 
 import (
 	"airmart_pay/internal"
-	"airmart_pay/pay-api/base"
+	"airmart_pay/pay/base"
 	"github.com/gin-gonic/gin"
 )
 
