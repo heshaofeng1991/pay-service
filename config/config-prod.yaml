@@ -1,0 +1,36 @@
+name: 'airmart'
+host: '192.168.8.231'
+port: 9050
+consul:
+  id: "026b2d83-88ff-462a-b21c-9db9118bccef"
+  host: '192.168.8.243:8500'
+jaeger:
+  host: '192.168.8.243'
+  port: "6831"
+mysql:
+  host: '192.168.8.243'
+  port: "3306"
+  user: 'root'
+  db: 'airmart'
+  password: '123456'
+redis:
+  host: '192.168.8.243'
+  port: "6379"
+  password: ''
+  db: 2
+jwt:
+  key: 'abcd'
+  expires:
+kafka:
+  address:
+    - 192.168.8.243:9093
+    - 192.168.8.243:9092
+  username: "adminscram"
+  password: "admin-secret"
+logs:
+  filename: "E:\\zhoushuping\\go\\airmart\\logs\\airmart.log"
+oss:
+  endpoint: 'https://oss-cn-hangzhou.aliyuncs.com'
+  bucket: 'airmart3'
+  id: 'LTAI5tCA6XcYCjdzS1NV14gR'
+  secret: 'cfeppFmU50EsNyaU7G7nuFka2lPtAh'

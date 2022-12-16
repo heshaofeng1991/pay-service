@@ -1,0 +1,10 @@
+nacos:
+  host: '172.16.165.2'
+  port: 8848
+  namespace: 'f42575d8-482c-46eb-b41f-12bb953c56ae'
+  user: 'nacos'
+  password: 'nacos'
+  dataid: 'airmart_nft_admin-sit.yaml'
+  group: 'sit'
+  cluster: "airmart_nft_admin"
+  open: true
