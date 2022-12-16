@@ -1,7 +1,7 @@
 package service
 
 import (
-	"airmart_pay/types"
+	types "airmart_pay/types/chinaums"
 )
 
 type NetPay interface {

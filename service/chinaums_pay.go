@@ -2,7 +2,7 @@ package service
 
 import (
 	"airmart_pay/internal/tool"
-	"airmart_pay/types"
+	types "airmart_pay/types/chinaums"
 	"fmt"
 	"github.com/bwmarrin/snowflake"
 	"net/http"

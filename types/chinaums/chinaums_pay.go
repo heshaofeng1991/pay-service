@@ -1,4 +1,4 @@
-package types
+package chinaums
 
 import "time"
 

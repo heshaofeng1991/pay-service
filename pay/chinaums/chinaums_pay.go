@@ -5,7 +5,7 @@ import (
 	"airmart_pay/internal"
 	"airmart_pay/pay/base"
 	"airmart_pay/service"
-	"airmart_pay/types"
+	types "airmart_pay/types/chinaums"
 	"errors"
 	"github.com/gin-gonic/gin"
 )
