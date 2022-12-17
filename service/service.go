@@ -5,5 +5,5 @@ import (
 )
 
 type NetPay interface {
-	Pay(req *types.NetPayReq) (int64, error)
+	Pay(req *types.ChinaumsPayReq) (int64, error)
 }

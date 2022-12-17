@@ -1,87 +1,73 @@
 package chinaums
 
 import (
-	"airmart-core/response"
 	"airmart_pay/internal"
 	"airmart_pay/pay/base"
 	"airmart_pay/service"
-	types "airmart_pay/types/chinaums"
-	"errors"
+	"airmart_pay/types"
 	"github.com/gin-gonic/gin"
 )
 
 func init() {
-	pay := &NetPay{}
-	base.Regiseter(internal.WHOLE_PAY, pay)
+	pay := &ChinaumsPay{}
+	base.Regiseter(internal.CHINAUMS_PAY, pay)
 }
 
-type NetPay struct {
+type ChinaumsPay struct {
 }
 
-func (w NetPay) Pay(ctx *gin.Context) {
-	req := &types.NetPayReq{}
-
-	s := service.New(ctx)
-
-	if err := ctx.ShouldBind(req); err != nil {
-		s.Failed(internal.ParamErr.Err(err))
-
-		return
-	}
-
-	id, err := service.New(ctx).Pay(req)
+func (w ChinaumsPay) Pay(ctx *gin.Context, req *types.UserPayReq, s *service.Srv) (int64, error) {
+	id, err := s.Pay(ctx, req)
 	if err != nil {
-		s.Failed(response.ParamErr.Err(errors.New("创建数藏Banner配置失败")))
+		s.Log.Errorf("[airmart_pay] ChinaumsPay error: %v", err)
 
-		return
+		return 0, err
 	}
 
-	s.Success(&types.NetPayData{
-		ID: id,
-	})
+	return id, nil
 }
 
-func (w NetPay) GetPayRecord(ctx *gin.Context) {
+func (w ChinaumsPay) GetPayRecord(ctx *gin.Context) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (w NetPay) Refund(ctx *gin.Context) {
+func (w ChinaumsPay) Refund(ctx *gin.Context) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (w NetPay) GetRefund(ctx *gin.Context) {
+func (w ChinaumsPay) GetRefund(ctx *gin.Context) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (w NetPay) CancelPay(ctx *gin.Context) {
+func (w ChinaumsPay) CancelPay(ctx *gin.Context) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (w NetPay) Callback(ctx *gin.Context) {
+func (w ChinaumsPay) Callback(ctx *gin.Context) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (w NetPay) MockPay(ctx *gin.Context) {
+func (w ChinaumsPay) MockPay(ctx *gin.Context) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (w NetPay) GetPayStatus(ctx *gin.Context) {
+func (w ChinaumsPay) GetPayStatus(ctx *gin.Context) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (w NetPay) NoticePay(ctx *gin.Context) {
+func (w ChinaumsPay) NoticePay(ctx *gin.Context) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (w NetPay) ReturnPayResult(ctx *gin.Context) {
+func (w ChinaumsPay) ReturnPayResult(ctx *gin.Context) {
 	//TODO implement me
 	panic("implement me")
 }

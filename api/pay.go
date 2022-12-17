@@ -1,26 +1,56 @@
 package api
 
 import (
+	"airmart_pay/internal"
+	inter "airmart_pay/internal"
 	"airmart_pay/pay"
+	"airmart_pay/service"
+	"airmart_pay/types"
+	"errors"
 	"github.com/gin-gonic/gin"
 )
 
 // Pay 客户端 发起支付 -- 下单支付
 func Pay(ctx *gin.Context) {
-	// get pay info 这里可以直接写入缓存，没有的时候查询数据库
+	req := &types.UserPayReq{}
+
+	s := service.New(ctx)
+
+	if err := ctx.ShouldBind(req); err != nil {
+		s.Log.Errorf("[airmart_pay] Pay Check Parameters error: %v", err)
+		s.Failed(internal.ParamErr.Err(err))
+
+		return
+	}
+
+	// TODO: get pay info 这里可以直接写入缓存，没有的时候查询数据库
 	//payInfo, err := dao.GetPayInfo(1)
 	//if err != nil {
 	//	return
 	//}
 
 	// get coin instance
-	coinInstance, ok := pay.GetCoinInstance(1)
+	coinInstance, ok := pay.GetCoinInstance(inter.CHINAUMS_PAY)
 	if !ok {
+		err := errors.New("system error")
+		s.Log.Errorf("[airmart_pay] Par error: %v", err)
+		s.Failed(internal.SystemErr.Err(err))
+
 		return
 	}
 
 	// 发起支付
-	coinInstance.Pay(ctx)
+	id, err := coinInstance.Pay(ctx, req, s)
+	if err != nil {
+		s.Log.Errorf("[airmart_pay] Pay Instance error: %v", err)
+		s.Failed(internal.SystemErr.Err(err))
+
+		return
+	}
+
+	s.Success(&types.UserPayData{
+		ID: id,
+	})
 }
 
 // GetPayRecord 支付流水记录 -- 订单交易查询

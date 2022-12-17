@@ -3,6 +3,8 @@ package other_pay
 import (
 	"airmart_pay/internal"
 	"airmart_pay/pay/base"
+	"airmart_pay/service"
+	"airmart_pay/types"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,7 +16,7 @@ func init() {
 type OtherPay struct {
 }
 
-func (o OtherPay) Pay(ctx *gin.Context) {
+func (o OtherPay) Pay(ctx *gin.Context, req *types.UserPayReq, s *service.Srv) (int64, error) {
 	//TODO implement me
 	panic("implement me")
 }

@@ -6,13 +6,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type srv struct {
+type Srv struct {
 	*common.Service
 }
 
 // New 服务初始化。
-func New(ctx *gin.Context) *srv {
-	return &srv{common.New(ctx)}
+func New(ctx *gin.Context) *Srv {
+	return &Srv{common.New(ctx)}
 }
 
 type CustomClaims struct {
