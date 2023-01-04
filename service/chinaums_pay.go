@@ -15,41 +15,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-/*
-	"app_id": "8a81c1be7d3411ad017de011a9c7065f"
-	"app_secret": "57f6d3df601d4d1eb2e604939c62d79c"
-	key: "NaM7fy2MDwYTcAb3BJxDx6yfkmywMC3pWRrJNX4P2JWm7ZSw"
-	msgSrcId: "136U"
- 	mid: "89810005999AQ8Q"
-    tid: "DM246155"
-	"ali_h5": "https://api-mop.chinaums.com/v1/netpay/trade/h5-pay",
-	"qrcode_url": "https://api-mop.chinaums.com/v1/netpay/bills/get-qrcode",
-	"wechat_mini": "https://api-mop.chinaums.com/v1/netpay/wx/unified-order",
-	"ali_app_url": "https://api-mop.chinaums.com/v1/netpay/trade/precreate"
-	"api_callbacks": {
-		recharge: "https://api-airmart-pre.66skins.co/wat/callback/chinaums_pay2/recharge"
-	}
-*/
-
 func (s *Srv) Pay(ctx *gin.Context, r *types.UserPayReq) (int64, error) {
 	// TODO：1. 查询订单是否真实存在且是有效的（未过期，未超时，未关闭，有效订单）
 	// 组装请求支付商请求结构
 	req := tp.ChinaumsPayReq{
-		AppId:     "8a81c1be7d3411ad017de011a9c7065f",
-		Timestamp: "20221219121300",
-		Nonce:     "99930147535388",
+		AppId:     "",
+		Timestamp: "",
+		Nonce:     "",
 	}
 
 	// 业务内容
 	content := tp.ChinaumsPayContent{
 		RequestTime: time.Now().Format("2006-01-02 15:04:05"),
-		MerOrderId:  "136U123456",
-		Mid:         "89810005999AQ8Q",
-		Tid:         "DM246155",
-		InstMid:     "YUEDANDEFAULT",
+		MerOrderId:  "",
+		Mid:         "",
+		Tid:         "",
+		InstMid:     "",
 		TotalAmount: "1",
-		NotifyUrl:   "https://qrtest2.chinaums.com/netpayportal/test/notifyUrl.do",
-		ReturnUrl:   "https://qrtest2.chinaums.com/netpayportal/test/returnUrl.do",
+		NotifyUrl:   "",
+		ReturnUrl:   "",
 	}
 
 	businessContent, _ := json.Marshal(content)
@@ -57,7 +41,7 @@ func (s *Srv) Pay(ctx *gin.Context, r *types.UserPayReq) (int64, error) {
 	req.Content = ct
 
 	// 验签
-	sign := tool.Sign(req.AppId, req.Timestamp, req.Nonce, ct, "57f6d3df601d4d1eb2e604939c62d79c")
+	sign := tool.Sign(req.AppId, req.Timestamp, req.Nonce, ct, "")
 	req.Signature = sign
 	s.Log.Infof("Service Pay request %v", req)
 
@@ -120,23 +104,23 @@ func (s *Srv) Pay(ctx *gin.Context, r *types.UserPayReq) (int64, error) {
 func (s *Srv) GetPayRecord(ctx *gin.Context, r *types.GetUserPayStatusReq) (*types.GetUserPayStatusResp, error) {
 	req := tp.GetChinaumsPayReq{
 		RequestTime: time.Now().Format("2006-01-02 15:04:05"),
-		MerOrderId:  "136U123456",
-		Mid:         "89810005999AQ8Q",
-		Tid:         "DM246155",
-		InstMid:     "YUEDANDEFAULT",
+		MerOrderId:  "",
+		Mid:         "",
+		Tid:         "",
+		InstMid:     "",
 	}
 
 	businessContent, _ := json.Marshal(req)
 	fmt.Println(string(businessContent))
 
 	// 验签
-	sign := tool.Sign("8a81c1be7d3411ad017de011a9c7065f", "20221219121300", "99930147535388", string(businessContent), "57f6d3df601d4d1eb2e604939c62d79c")
+	sign := tool.Sign("", "", "", string(businessContent), "")
 
 	// 发起http post请求
 	reqUrl := "https://api-mop.chinaums.com/v1/netpay/query"
 	mp := make(map[string]string, 0)
 	mp["Authorization"] = fmt.Sprintf("%v AppId=\"%v\",Timestamp=\"%v\",Nonce=\"%v\",Signature=\"%v\"",
-		"OPEN-BODY-SIG", "8a81c1be7d3411ad017de011a9c7065f", "20221219121300", "99930147535388", sign)
+		"OPEN-BODY-SIG", "", "", "", sign)
 	fmt.Println(mp["Authorization"])
 	fmt.Println("sign", sign)
 	s.Log.Infof("req %+v", req)
