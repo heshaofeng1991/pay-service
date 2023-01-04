@@ -1,10 +1,11 @@
 package base
 
 import (
-	"airmart_pay/service"
-	"airmart_pay/types"
-	"github.com/gin-gonic/gin"
+	"pay-service/service"
+	"pay-service/types"
 	"sync"
+
+	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -17,7 +18,7 @@ type PayInstance interface {
 	Pay(ctx *gin.Context, req *types.UserPayReq, s *service.Srv) (int64, error)
 
 	// GetPayRecord 支付流水记录 -- 订单交易查询
-	GetPayRecord(ctx *gin.Context)
+	GetPayRecord(ctx *gin.Context, req *types.GetUserPayStatusReq, s *service.Srv) (*types.GetUserPayStatusResp, error)
 
 	// Refund 退款
 	Refund(ctx *gin.Context)

@@ -1,7 +1,7 @@
 package internal
 
 import (
-	"airmart-core/response"
+	"core/response"
 )
 
 var (

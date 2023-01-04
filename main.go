@@ -1,10 +1,11 @@
 package main
 
 import (
-	"airmart-core/common"
-	"airmart-core/initialize"
-	"airmart_pay/global"
-	"airmart_pay/router"
+	"core/common"
+	"core/initialize"
+	"pay-service/global"
+	"pay-service/router"
+
 	"go.uber.org/zap"
 )
 

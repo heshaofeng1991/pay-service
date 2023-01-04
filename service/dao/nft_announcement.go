@@ -1,16 +1,17 @@
 package dao
 
 import (
-	inter "airmart_pay/internal"
-	"airmart_pay/model"
-	"airmart_pay/service/cache"
-	tp "airmart_pay/types"
 	"context"
 	"encoding/json"
-	"go.uber.org/zap"
-	"gorm.io/gorm"
+	inter "pay-service/internal"
+	"pay-service/model"
+	"pay-service/service/cache"
+	tp "pay-service/types"
 	"strconv"
 	"time"
+
+	"go.uber.org/zap"
+	"gorm.io/gorm"
 )
 
 func exist(ctx context.Context) error {

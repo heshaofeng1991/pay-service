@@ -19,12 +19,39 @@ type ChinaumsPayReq struct {
 }
 
 type ChinaumsPayContent struct {
-	RequestTime string `binding:"required,gt=0" json:"requestTimestamp"`    // 报文请求时间 格式yyyy-MM-dd HH:mm:ss
-	MerOrderId  string `binding:"required,gt=0" json:"merOrderId"`          // 商户订单号
-	Mid         string `binding:"required,gt=0,lte=15" json:"mid"`          // 商户号
-	Tid         string `binding:"required,gt=0,lte=8" json:"tid,omitempty"` // 终端号
-	InstMid     string `binding:"required,gte=8,lte=32"`                    // 业务类型 固定值 H5DEFAULT
-	TotalAmount string `binding:"omitempty,gt=0" json:"totalAmount"`        // 支付总金额(分)
-	NotifyUrl   string `json:"notifyUrl"`                                   // 支付通知结果
-	ReturnUrl   string `json:"returnUrl"`                                   // 结果页面返回
+	RequestTime string `binding:"required,gt=0" json:"requestTimestamp"` // 报文请求时间 格式yyyy-MM-dd HH:mm:ss
+	MerOrderId  string `binding:"required,gt=0" json:"merOrderId"`       // 商户订单号
+	Mid         string `binding:"required,gt=0,lte=15" json:"mid"`       // 商户号
+	Tid         string `binding:"required,gt=0,lte=8" json:"tid"`        // 终端号
+	InstMid     string `binding:"required,gte=8,lte=32"  json:"instMid"` // 业务类型 固定值 H5DEFAULT
+	TotalAmount string `binding:"omitempty,gt=0" json:"totalAmount"`     // 支付总金额(分)
+	NotifyUrl   string `json:"notifyUrl"`                                // 支付通知结果
+	ReturnUrl   string `json:"returnUrl"`                                // 结果页面返回
+}
+
+type GetChinaumsPayReq struct {
+	RequestTime string `binding:"required,gt=0" json:"requestTimestamp"` // 报文请求时间 格式yyyy-MM-dd HH:mm:ss
+	MerOrderId  string `binding:"required,gt=0" json:"merOrderId"`       // 商户订单号
+	Mid         string `binding:"required,gt=0,lte=15" json:"mid"`       // 商户号
+	Tid         string `binding:"required,gt=0,lte=8" json:"tid"`        // 终端号
+	InstMid     string `binding:"required,gte=8,lte=32" json:"instMid"`  // 业务类型 固定值 H5DEFAULT
+}
+
+type ChinaumsRefundReq struct {
+	RequestTimestamp string                     `binding:"required,gt=0" json:"requestTimestamp"`           // 报文请求时间 格式yyyy-MM-dd HH:mm:ss
+	MerOrderId       string                     `binding:"required,gt=0" json:"merOrderId"`                 // 商户订单号
+	InstMid          string                     `binding:"required,gte=8,lte=32" json:"instMid"`            // 业务类型 固定值 H5DEFAULT
+	Mid              string                     `binding:"required,gt=0,lte=15" json:"mid"`                 // 商户号
+	Tid              string                     `binding:"required,gt=0,lte=8" json:"tid"`                  // 终端号
+	RefundAmount     int                        `binding:"required,gt=0,lte=100000000" json:"refundAmount"` // 若下单接口中上送了分账标记字 段divisionFlag，则该字段 refundAmount=subOrders 中totalAmount之和 +platformAmount
+	SubOrders        []*ChinaumsRefundSubOrders `json:"subOrders,omitempty"`                                // 子订单信息
+	PlatformAmount   int                        `json:"platformAmount,omitempty"`                           // 平台商户退款分账金额
+	RefundOrderId    string                     `json:"refundOrderId,omitempty"`                            // 退款订单号
+	BillDate         string                     `json:"billDate,omitempty"`                                 // 账单日期
+	RefundDesc       string                     `json:"refundDesc,omitempty"`                               // 退款说明
+}
+
+type ChinaumsRefundSubOrders struct {
+	TotalAmount int    `json:"totalAmount"` // 支付金额
+	Mid         string `json:"mid"`         // 商户号
 }

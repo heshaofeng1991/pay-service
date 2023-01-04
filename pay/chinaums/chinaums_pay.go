@@ -1,10 +1,11 @@
 package chinaums
 
 import (
-	"airmart_pay/internal"
-	"airmart_pay/pay/base"
-	"airmart_pay/service"
-	"airmart_pay/types"
+	"pay-service/internal"
+	"pay-service/pay/base"
+	"pay-service/service"
+	"pay-service/types"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,7 +20,7 @@ type ChinaumsPay struct {
 func (w ChinaumsPay) Pay(ctx *gin.Context, req *types.UserPayReq, s *service.Srv) (int64, error) {
 	id, err := s.Pay(ctx, req)
 	if err != nil {
-		s.Log.Errorf("[airmart_pay] ChinaumsPay error: %v", err)
+		s.Log.Errorf("[pay-service] ChinaumsPay error: %v", err)
 
 		return 0, err
 	}
@@ -27,9 +28,8 @@ func (w ChinaumsPay) Pay(ctx *gin.Context, req *types.UserPayReq, s *service.Srv
 	return id, nil
 }
 
-func (w ChinaumsPay) GetPayRecord(ctx *gin.Context) {
-	//TODO implement me
-	panic("implement me")
+func (w ChinaumsPay) GetPayRecord(ctx *gin.Context, req *types.GetUserPayStatusReq, s *service.Srv) (*types.GetUserPayStatusResp, error) {
+	return s.GetPayRecord(ctx, req)
 }
 
 func (w ChinaumsPay) Refund(ctx *gin.Context) {

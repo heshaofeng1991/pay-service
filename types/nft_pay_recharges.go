@@ -10,6 +10,7 @@ type UserPayReq struct {
 	DiscountCode string `binding:"omitempty,gte=0" json:"discount_code,omitempty"` // 兑换码
 	WxCode       string `binding:"omitempty,gte=0" json:"wx_code,omitempty"`       // 微信授权码（微信小程序&网页授权code）
 	WxAppID      string `binding:"omitempty,gte=0" json:"wx_app_id,omitempty"`     // 微信应用ID(微信原生支付AppId，不传默认渠道配置appId)
+	ChannelID    int64  `binding:"required,gt=0" json:"channel_id,string"`         // 支付渠道ID（哪家供应商）
 }
 
 type UserPayResp struct {
@@ -18,4 +19,30 @@ type UserPayResp struct {
 
 type UserPayData struct {
 	ID int64 `json:"ID,string,required"`
+}
+
+type GetUserPayStatusReq struct {
+	ID int64 `form:"id" binding:"required,gt=0" json:"id,string"` // 商品订单ID
+}
+
+type GetUserPayStatusResp struct {
+	PayTime           string `json:"payTime"`
+	ConnectSys        string `json:"connectSys"`
+	DelegatedFlag     string `json:"delegatedFlag"`
+	MerName           string `json:"merName"`
+	Mid               string `json:"mid"`
+	SettleDate        string `json:"settleDate"`
+	SettleRefId       string `json:"settleRefId"`
+	Tid               string `json:"tid"`
+	TotalAmount       int    `json:"totalAmount"`
+	ChnlCost          string `json:"chnlCost"`
+	TargetMid         string `json:"targetMid"`
+	ResponseTimestamp string `json:"responseTimestamp"`
+	ErrCode           string `json:"errCode"`
+	TargetStatus      string `json:"targetStatus"`
+	SeqId             string `json:"seqId"`
+	MerOrderId        string `json:"merOrderId"`
+	RefundAmount      int    `json:"refundAmount"`
+	Status            string `json:"status"`
+	TargetSys         string `json:"targetSys"`
 }

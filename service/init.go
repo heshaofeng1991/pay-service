@@ -1,7 +1,8 @@
 package service
 
 import (
-	"airmart-core/common"
+	"core/common"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )

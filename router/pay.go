@@ -1,7 +1,8 @@
 package router
 
 import (
-	"airmart_pay/api"
+	"pay-service/api"
+
 	"github.com/gin-gonic/gin"
 )
 

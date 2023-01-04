@@ -5,8 +5,10 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -111,10 +113,13 @@ func SendGetRequest(url string, params map[string]interface{},
 		return data, err
 	}
 
+	fmt.Println("323143213", err)
+	fmt.Println("afdsafsadfa %v", rsp.Body)
+
 	defer rsp.Body.Close()
 
 	if rsp.StatusCode != http.StatusOK {
-		return data, errors.New("http 请求失败")
+		return data, fmt.Errorf("http 请求失败, http status code : %v", rsp.StatusCode)
 	}
 
 	return io.ReadAll(rsp.Body)
@@ -140,6 +145,7 @@ func SendRequestToBaseAPI(url, method string, body io.Reader, headers map[string
 
 	req, err = http.NewRequestWithContext(context.Background(), method, url, body)
 	if err != nil {
+		fmt.Println("33333", err)
 		return data, err
 	}
 
@@ -148,12 +154,14 @@ func SendRequestToBaseAPI(url, method string, body io.Reader, headers map[string
 
 	resp, err = client.Do(req)
 	if err != nil {
+		fmt.Println("444444", err)
 		return data, err
 	}
 
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
+		fmt.Println("55555", resp.StatusCode)
 		return data, errors.New("http 请求失败")
 	}
 
@@ -188,4 +196,56 @@ func ProcessHTTPParam(req *http.Request, params map[string]interface{}) {
 	}
 
 	req.URL.RawQuery = query.Encode()
+}
+
+func HttpRequest(ctx context.Context, method, url string, body io.Reader, headers map[string]string) ([]byte, error) {
+	var (
+		result []byte
+		err    error
+	)
+
+	result = make([]byte, 0)
+
+	// 30秒超时
+	// transport := &http.Transport{
+	// 	TLSNextProto: map[string]func(string, *tls.Conn) http.RoundTripper{},
+	// }
+
+	client := &http.Client{
+		Timeout: 30 * time.Second,
+		// Transport: transport,
+	}
+	request, err := http.NewRequestWithContext(ctx, method, url, body)
+	if err != nil {
+		log.Printf("HttpGet NewRequestWithContext err %v", err)
+
+		return result, err
+	}
+	fmt.Println(request)
+	fmt.Println(err)
+
+	// set Header
+	ProcessHTTPHeader(request, headers)
+
+	resp, err := client.Do(request)
+	if err != nil {
+		log.Printf("HttpGet Do err %v", err)
+
+		return result, err
+	}
+
+	log.Printf("HttpGet Do resp status code %v， err %v", resp.StatusCode, err)
+
+	if resp.StatusCode != http.StatusOK {
+		return result, fmt.Errorf("请求支付供应商失败")
+	}
+
+	result, err = io.ReadAll(resp.Body)
+	if err != nil {
+		log.Printf("HttpGet io  ReadAll %v", err)
+
+		return result, err
+	}
+
+	return result, nil
 }

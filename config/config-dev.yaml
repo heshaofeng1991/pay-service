@@ -1,66 +1,66 @@
 nacos:
-  host: '192.168.9.100'
-  port: 8848
+  host: ''
+  port: 0
   namespace: ''
-  user: 'nacos'
-  password: 'nacos'
-  dataid: 'airmart_nft_admin-dev.yaml'
-  group: 'dev'
-  cluster: "airmart_nft_admin"
+  user: ''
+  password: ''
+  dataid: ''
+  group: ''
+  cluster: ""
   open: false
 service:
-  name: 'airmart_nft_admin'
+  name: ''
   metadata:
-  host: '192.168.9.100'
-  port: 9050
-  group: 'dev'
-  cluster: 'airmart_nft_admin'
+  host: ''
+  port: 0
+  group: ''
+  cluster: ''
   checkAddr: '/check'
   namespace: ''
 consul:
-  id: "026b2d83-88ff-462a-b21c-9db9118bccef"
-  host: '192.168.9.100:8500'
+  id: ""
+  host: ''
 jaeger:
-  host: '192.168.9.100'
-  port: "6831"
+  host: ''
+  port: ""
 mysql:
-  host: '192.168.9.100'
-  port: "3306"
-  user: 'root'
-  name: 'airmart_nft'
-  password: '123456'
-  prefix: 'nft_'
-redis:
-  host: '192.168.9.100'
-  port: "6379"
+  host: ''
+  port: ""
+  user: ''
+  name: ''
   password: ''
-  db: 2
+  prefix: ''
+redis:
+  host: ''
+  port: ""
+  password: ''
+  db: 0
 jwt:
-  key: 'abcd'
+  key: ''
   expires:
 kafka:
   address:
     - 192.168.9.100:9093
     - 192.168.9.100:9092
-  username: "adminscram"
-  password: "admin-secret"
+  username: ""
+  password: ""
 logs:
-  filename: "./logs/airmart_nft_admin.log"
+  filename: ""
 oss:
-  endpoint: 'https://oss-cn-hangzhou.aliyuncs.com'
-  bucket: 'airmart3'
-  id: 'LTAI5tCA6XcYCjdzS1NV14gR'
-  secret: 'cfeppFmU50EsNyaU7G7nuFka2lPtAh'
+  endpoint: ''
+  bucket: ''
+  id: ''
+  secret: ''
 sls:
-  name: "airmart-combo-box"
-  id: "LTAI5t8qDE4aCcQnNWWYe5eT"
-  secret: "7yh9OvbRdLexFYBSwRQITrrIxZiqVN"
-  host: "cn-shanghai.log.aliyuncs.com"
-  storeName: "admin"
+  name: ""
+  id: ""
+  secret: ""
+  host: ""
+  storeName: ""
 master:
   jwt:
     privateKey:
-    publicKey: "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDV7lDiyoqkfaOvx0yY9RvoxtV3\nbfAACAzDLjvyasVF3MFcdRIAx3NTXZoylxxkD8Thd7k3bOwTFONOf4zi3iUkSKOZ\ny2Hhtbpvh8xWQC1P3ERnAyJA8wpZvwGL20mXpmdPe8QdF6Y2q1BTb9OyqfSfNHLA\nXBbylLYcGoTMjqSF6wIDAQAB\n-----END PUBLIC KEY-----"
+    publicKey: ""
     expires:
-  host: "https://api-airmart-sit.66skins.co"
-  auth: "Bearer hKEEFzt1rGfKDXTx"
+  host: ""
+  auth: ""

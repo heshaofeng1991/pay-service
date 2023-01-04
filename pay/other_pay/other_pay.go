@@ -1,10 +1,11 @@
 package other_pay
 
 import (
-	"airmart_pay/internal"
-	"airmart_pay/pay/base"
-	"airmart_pay/service"
-	"airmart_pay/types"
+	"pay-service/internal"
+	"pay-service/pay/base"
+	"pay-service/service"
+	"pay-service/types"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,7 +22,7 @@ func (o OtherPay) Pay(ctx *gin.Context, req *types.UserPayReq, s *service.Srv) (
 	panic("implement me")
 }
 
-func (o OtherPay) GetPayRecord(ctx *gin.Context) {
+func (o OtherPay) GetPayRecord(ctx *gin.Context, req *types.GetUserPayStatusReq, s *service.Srv) (*types.GetUserPayStatusResp, error) {
 	//TODO implement me
 	panic("implement me")
 }

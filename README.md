@@ -1,8 +1,8 @@
-# airmart_pay项目说明
+# pay-service项目说明
 ---
 
 ## 项目结构
-- airmart_pay 项目服务
+- pay-service 项目服务
   - config 服务配置文件位置
   - global 服务全局配置初始化
   - internal 服务内部使用的一些东西
@@ -19,15 +19,12 @@
 ## 项目依赖设置 go mod && git config
 ```shell
 go env -w GO111MODULE=on
-go env -w GOPRIVATE=codeup.aliyun.com
-go env -w GONOPROXY=codeup.aliyun.com
-git config --global url."ssh://git@codeup.aliyun.com".insteadOf "https://codeup.aliyun.com"
 ```
 
 ## 快速开始
 ```shell
-git clone git@codeup.aliyun.com:62da4ef41a358b4399af6f42/airmartServices/airmart_pay.git
-cd airmart_pay
+git clone git@github.com:heshaofeng1991/pay-service.git
+cd pay-service
 go mod tidy -compat=1.9
 go run main.go -confFile ./config/config-dev.yaml
 ```
@@ -39,10 +36,10 @@ Consul 服务注册，服务发现
 Jaeger Trace链路追踪，监控
 Mysql  数据库
 Redis  Redis
-Nacos  配置中心（viper）
+Nacos  配置中心
 JWT    鉴权
-Logger zap(考虑集成logrus)
+Logger zap
 Kafka  消息队列
-OSS    对象存储（bucket）
-ElasticSearch 大数据处理（基本实现所有Document APIs,还未集成到airmart-core）
+OSS    对象存储
+ElasticSearch
 ```

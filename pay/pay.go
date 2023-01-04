@@ -1,26 +1,27 @@
 package pay
 
 import (
-	. "airmart_pay/pay/base"
-	_ "airmart_pay/pay/chinaums"
+	"pay-service/pay/base"
+	_ "pay-service/pay/chinaums"
+	_ "pay-service/pay/other_pay"
 )
 
-func GetAll() []PayInstance {
-	pays := make([]PayInstance, 0)
+func GetAll() []base.PayInstance {
+	pays := make([]base.PayInstance, 0)
 
-	Lock.Lock()
-	for index := range AllPay {
-		pays = append(pays, AllPay[index])
+	base.Lock.Lock()
+	for index := range base.AllPay {
+		pays = append(pays, base.AllPay[index])
 	}
-	Lock.Unlock()
+	base.Lock.Unlock()
 
 	return pays
 }
 
-func GetCoinInstance(payID int64) (PayInstance, bool) {
-	Lock.Lock()
-	pay, ok := AllPay[payID]
-	Lock.Unlock()
+func GetCoinInstance(payID int64) (base.PayInstance, bool) {
+	base.Lock.Lock()
+	pay, ok := base.AllPay[payID]
+	base.Lock.Unlock()
 
 	return pay, ok
 }

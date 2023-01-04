@@ -1,8 +1,9 @@
 package dao
 
 import (
-	"airmart_pay/global"
 	"context"
+	"pay-service/global"
+
 	"gorm.io/gorm"
 )
 
